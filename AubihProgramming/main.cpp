@@ -292,9 +292,33 @@ bool caseInsensitiveStringCompare( const std::string& str1, const std::string& s
     std::transform( str2Cpy.begin(), str2Cpy.end(), str2Cpy.begin(), ::tolower );
     return ( str1Cpy == str2Cpy );
 }
+bool IsStringAlphaNumeric(const std::string& str){
+    return std::all_of(str.begin(), str.end(), [loc = std::locale{}](char c){return std::isalnum(c, loc);});
+}
+bool containWhitespace(std::string str){
+    bool whitespace = true;
+    for(int i = 0; i < str.length(); i++)
+    {
+        if (std::isspace(str.at(i))){
+            whitespace =  true;
+        }
+        else{
+            whitespace = false;
+        }
+    }
+    return whitespace;
+}
+bool isWhitespace(std::string s){
+    for(int index = 0; index < s.length(); index++){
+        if(!std::isspace(s[index]))
+            return false;
+    }
+    return true;
+}
 void TaskSeven(){
     
-    /*Exercise 7
+    /*
+     Exercise 7
      • For input string determine if it the same whether you read it from left
      of from right side. As a result, print „Yes“ or „No“. Make sure that the
      input string does not contain whitespaces. The program should be
@@ -307,28 +331,29 @@ void TaskSeven(){
      */
     ClearScreen();
     //getting and validating input
-    std::cout << "Enter string to determine if it's palindrome: " << std::endl;
-    std::string string;
-    std::cin >> string;
+    std::string word;
+    std::cout << std::endl;
+    std::cout << "Enter string determine if it the same whether you read it from left or from right side: " << std::endl;
+    std::cin.clear(); // clear input buffer to restore cin to a usable state
+    std::getline(std::cin >> std::ws, word);
     // checking does string contain any whitespaces
-    while (string.empty()) // not finished
+    while (word.empty() || (!IsStringAlphaNumeric(word)) || (containWhitespace(word)) || (word.size() < 1 || (word.size() == 1)))
     {
-        if (caseInsensitiveStringCompare(string,"exit")){
+        if (caseInsensitiveStringCompare(word,"exit")){
             break;
         }
         std::cin.clear(); // clear input buffer to restore cin to a usable state
-        std::cin.ignore(100, '\n'); // ignore last input
-        std::cout << "Invalid input. String must not contain whitespaces.\n Only alphanumeric characters are allowed to be used. \n To exit program enter >> exit << " << std::endl;
-        std::cout << "Enter integer again: " << std::endl;
-        std::cin >> string;
+        std::cout << "Invalid input.\n ! String must not contain whitespaces.\n ! Only alphanumeric characters are allowed to be used. \n ! String has to be at least 2 characters long.\nTo exit program enter >> exit << \n" << std::endl;
+        std::cout << "Enter string again: " << std::endl;
+        std::getline(std::cin >> std::ws, word);
         std::cout << std::endl;
     }
-    if (caseInsensitiveStringCompare(string,"exit")) {
+    if (caseInsensitiveStringCompare(word,"exit")) {
         std::exit(0);
     }
     // checking whether string is palindrome
     // please note when string goes to the function below it's already validated for not having whitespaces etc
-    if (IsPalindrome(string))
+    if (IsPalindrome(word))
     {
         std::cout << "YES" << std::endl;
     }
@@ -338,18 +363,57 @@ void TaskSeven(){
     }
     
 }
+std::string StringToUpper(std::string strToConvert)
+{
+    std::transform(strToConvert.begin(), strToConvert.end(), strToConvert.begin(), ::toupper);
+    
+    return strToConvert;
+}
+void TaskEight(){
+    /*
+     Exercise 8
+     • For input sentence, output the same sentence in upper case. If any
+     character is already in upper case or not a letter, leave it as such.
+     For example:
+     - Input: „This is example 6.“; Output: „THIS IS EXAMPLE 6.
+     */
+    ClearScreen();
+
+    //getting and validating input
+    std::string sentence;
+    std::string converted;
+    std::cout << std::endl;
+    std::cout << "Enter some sentence: " << std::endl;
+    std::cin.clear(); // clear input buffer to restore cin to a usable state
+    std::getline(std::cin >> std::ws, sentence);
+    
+    if (sentence.size() != 0){
+        converted = StringToUpper(sentence);
+        std::cout << "\nYour string converted to upper case looks like this: " << std::endl;
+        std::cout << "\n";
+        std::cout << ">> " << converted << " <<";
+    }
+    else{
+        std::cout << "There was a problem transforming your string to upper case.\nPlease try again.";
+    }
+}
+void TaskNine(){
+    
+    
+}
 
 #include <iostream>
 #include <string>
 int main(int argc, const char * argv[]) {
-    
+
     //TaskOne();
     //TaskTwo();
     //TaskThree();
     //TaskFour();
     //TaskFive();
     //TaskSix();
-    TaskSeven();
+    //TaskSeven();
+    TaskEight();
     
     std::cout << std::endl;
     return 0;
