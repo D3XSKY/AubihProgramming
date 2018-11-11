@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <math.h>       /* sqrt */
 #include <string>
+#include <cctype>
 #define PI 3.14159
 void ClearScreen()
 {
@@ -275,31 +276,21 @@ void TaskSix(){
     }
 }
 // function to check whether string is palindrome
-void IsPalindrome(char string[]) //Checks the string to see if the characters inside are a palindrome.
+bool IsPalindrome (std::string str)
 {
-    int stringStart, stringMiddle, stringEnd, length = 0;
-    
-    std::cout << "\n**Palindrome Analysis**" << std::endl;
-    while (string[length] != NULL) //counts the length of the string before the NULL character at the end.
-    {
-        length++;
-    }
-    stringEnd = length - 1; //the final position in the register from #0 to #length-1.
-    stringMiddle = length / 2; //compares the first half of the string with the last half.
-    
-    for (stringStart = 0; stringStart < stringMiddle; stringStart++) //compares the first and last character, the first + 1 and the last -1 characters until the middle is reached.
-    {
-        if (string[stringStart] != string[stringEnd]) //if the string is not a palindrome, this will be the output.
-        {
-            std::cout << "The string: " << string << " is not a palindrome" << std::endl;
-            break;
-        }
-        stringEnd--;
-    }
-    if (stringStart == stringMiddle) //confirms the string is a palindrome if the first half is the same as the last half of the string.
-    {
-        std::cout << "The string: " << string << " is a palindrome" << std::endl;
-    }
+    int i;
+    int length = str.length();
+    for (i = 0; i < length; ++i)
+        if (str.at(i) != str.at(length - i - 1)) return false;
+    return true;
+}
+
+bool caseInsensitiveStringCompare( const std::string& str1, const std::string& str2 ) {
+    std::string str1Cpy( str1 );
+    std::string str2Cpy( str2 );
+    std::transform( str1Cpy.begin(), str1Cpy.end(), str1Cpy.begin(), ::tolower );
+    std::transform( str2Cpy.begin(), str2Cpy.end(), str2Cpy.begin(), ::tolower );
+    return ( str1Cpy == str2Cpy );
 }
 void TaskSeven(){
     
@@ -316,9 +307,27 @@ void TaskSeven(){
      */
     ClearScreen();
     //getting and validating input
+    std::cout << "Enter string to determine if it's palindrome: " << std::endl;
     std::string string;
     std::cin >> string;
+    // checking does string contain any whitespaces
+    while (string.empty()) // not finished
+    {
+        if (caseInsensitiveStringCompare(string,"exit")){
+            break;
+        }
+        std::cin.clear(); // clear input buffer to restore cin to a usable state
+        std::cin.ignore(100, '\n'); // ignore last input
+        std::cout << "Invalid input. String must not contain whitespaces.\n Only alphanumeric characters are allowed to be used. \n To exit program enter >> exit << " << std::endl;
+        std::cout << "Enter integer again: " << std::endl;
+        std::cin >> string;
+        std::cout << std::endl;
+    }
+    if (caseInsensitiveStringCompare(string,"exit")) {
+        std::exit(0);
+    }
     // checking whether string is palindrome
+    // please note when string goes to the function below it's already validated for not having whitespaces etc
     if (IsPalindrome(string))
     {
         std::cout << "YES" << std::endl;
