@@ -13,14 +13,24 @@
 #include <math.h>       /* sqrt */
 #include <string>
 #include <cctype>
+#include <chrono>
+#include <thread>
+#include <stdio.h>
 #define PI 3.14159
 void ClearScreen()
 {
     std::cout << std::string( 100, '\n' );
 }
+void Pause()
+{
+    std::cin.clear();
+    std::cout << std::endl << "Press any key to continue...";
+    std::cin.get();
+    std::cin.clear();
+}
 void TaskOne(){
-    ClearScreen();
-    
+    std::cout << ">> Task 1 <<" << std::endl;
+    std::cout << std::endl;
     double x;
     double square;
     double tothree;
@@ -33,7 +43,8 @@ void TaskOne(){
     std::cout << x << " to the power of three is: " << tothree << std::endl;
 }
 void TaskTwo(){
-    ClearScreen();
+    std::cout << ">> Task 2 <<" << std::endl;
+    std::cout << std::endl;
     int numberOfElements;
     double sum = 0;
     double average;
@@ -54,7 +65,8 @@ void TaskTwo(){
     
 }
 void TaskThree(){
-
+    std::cout << ">> Task 3 <<" << std::endl;
+    std::cout << std::endl;
     try{
         int number = 0;
         int count = 0;
@@ -64,7 +76,6 @@ void TaskThree(){
         
         if (number > 0){
             // logic
-            ClearScreen();
             for (int i = 0; i < number; i++) {
                 if (i <= number / 2) {
                     count = n + 1;
@@ -95,7 +106,8 @@ void TaskThree(){
     }
 }
 void TaskFour(){
-    ClearScreen();
+    std::cout << ">> Task 4 <<" << std::endl;
+    std::cout << std::endl;
     int secNum = 0; int firstNum = 0; char c;
     try {
         // getting and validating input
@@ -190,12 +202,13 @@ void TaskFour(){
     }
 }
 void TaskFive(){
+    std::cout << ">> Task 5 <<" << std::endl;
+    std::cout << std::endl;
     /* Exercise 5
      • For input radius of a circle (of type float), calculate and output its
      perimeter and surface area. For invalid input end program with a
      proper message.
      */
-    ClearScreen();
     // getting and validating input, input has to be of type float or we'll prompt user to enter
     float radius, area, circum;
     std::cout << "\n\n Find the area and circumference of any circle :\n";
@@ -224,6 +237,8 @@ void TaskFive(){
     std::cout << std::endl;
 }
 void TaskSix(){
+    std::cout << ">> Task 6 <<" << std::endl;
+    std::cout << std::endl;
     /*
      Exercise 6
      • For an input positive integer N, list all non-prime numbers from 1 to
@@ -232,8 +247,6 @@ void TaskSix(){
      - for input 10, the output should be: 4, 6, 8, 9, 10
      
      */
-    
-    ClearScreen();
     
     //getting input and validating it
     int n =0; // declaring and initializing variable
@@ -316,7 +329,8 @@ bool isWhitespace(std::string s){
     return true;
 }
 void TaskSeven(){
-    
+    std::cout << ">> Task 7 <<" << std::endl;
+    std::cout << std::endl;
     /*
      Exercise 7
      • For input string determine if it the same whether you read it from left
@@ -329,7 +343,7 @@ void TaskSeven(){
      - For input „Abba“ the result is „No“.
      Hint: You may need string.substr function and/or string.at function.
      */
-    ClearScreen();
+
     //getting and validating input
     std::string word;
     std::cout << std::endl;
@@ -370,6 +384,8 @@ std::string StringToUpper(std::string strToConvert)
     return strToConvert;
 }
 void TaskEight(){
+    std::cout << ">> Task 8 <<" << std::endl;
+    std::cout << std::endl;
     /*
      Exercise 8
      • For input sentence, output the same sentence in upper case. If any
@@ -377,7 +393,7 @@ void TaskEight(){
      For example:
      - Input: „This is example 6.“; Output: „THIS IS EXAMPLE 6.
      */
-    ClearScreen();
+    try{
 
     //getting and validating input
     std::string sentence;
@@ -387,34 +403,150 @@ void TaskEight(){
     std::cin.clear(); // clear input buffer to restore cin to a usable state
     std::getline(std::cin >> std::ws, sentence);
     
-    if (sentence.size() != 0){
+    if (sentence.size() > 0){
         converted = StringToUpper(sentence);
         std::cout << "\nYour string converted to upper case looks like this: " << std::endl;
         std::cout << "\n";
         std::cout << ">> " << converted << " <<";
     }
     else{
-        std::cout << "There was a problem transforming your string to upper case.\nPlease try again.";
+        throw 666;
+    }
+    }
+    catch (int e){
+        std::cout << "There was a problem transforming your string to upper case.\nPlease try again.\n Error code: " << e << std::endl;
     }
 }
+std::vector<std::string> SplitSentence(char* sentence, char delimiter=' ')
+{
+    std::vector<std::string> sentenceReversed;
+    do
+    {
+        char* begin =sentence;
+        while(*sentence != delimiter && *sentence)
+            sentence++;
+        sentenceReversed.push_back(std::string(begin, sentence));
+    }while(0 != *sentence++);
+    return sentenceReversed;
+}
 void TaskNine(){
+    std::cout << ">> Task 9 <<" << std::endl;
+    std::cout << std::endl;
+    /*
+     Exercise 9
+     • For an input sentence, output it with words in reverse order. You may
+     assume that any set of characters between two whitespaces is a
+     word. If there are two whitespaces next to one another, consider
+     them as one whitespace and output as a single blank space.
+     For example:
+     - Input: „This is exercise 7.“; „7. exercise is This“
+     - Input: „Hello“; Output: „Hello“
+     - Input: „Hello World“; Output: „World Hello“
+     */
     
+    // reference for both functions from stackoverflow
+    // https://stackoverflow.com/a/31018227/9648082
+    try{
+    std::string sentence;
+    std::vector<std::string> sentenceHolder;
+    std::cout<<"Enter the sentence in order to reverse it: ";
+    std::cin.clear(); // clear input buffer to restore cin to a usable state
+    std::getline(std::cin >> std::ws, sentence);
+    std::cout<<std::endl;
+        if (sentence.size() > 1){
+    sentenceHolder=SplitSentence((char*)sentence.c_str());
+    sentence.clear();
+    std::cout<<"Sentence reversed: \n";
+    for(int i=sentenceHolder.size()-1; i>=0; i--) sentence+=sentenceHolder.at(i)+" ";
+    //cout<<tempStr.at(i)<<" ";
+    std::cout<<sentence<<std::endl;
+    }
+        else{
+            throw 666;
+        }
+    }
+    catch (int e){
+    std::cout << "There was a problem reversing your sentence.\nPlease try again.\n Error code: " << e << std::endl;
+    }
     
+}
+//https://www.geeksforgeeks.org/reverse-a-string-in-c-cpp-different-methods/
+std::string ReverseWord(std::string& word)
+{
+    int n = word.length();
+    // Swap character starting from two
+    // corners
+    for (int i = 0; i < n / 2; i++)
+        std::swap(word[i], word[n - i - 1]);
+    return word;
+}
+
+void TaskTen(){
+    std::cout << ">> Task 10 <<" << std::endl;
+    /*
+     Exercise 10
+     • For an input sentence, output it with every individual word in reverse
+     order. You may assume that any set of characters between two
+     whitespaces is a word. If there are two whitespaces next to one
+     another, consider them as one whitespace and output as a single
+     blank space.
+     For example:
+     - Input: „This is exercise 7.“; „sihT si esicrexe .7“
+     - Input: „Hello“; Output: „olleH“
+     - Input: „Hello World“; Output: „olleH dlroW“
+     */
+    try{
+        std::string words;
+        std::string sentence;
+        
+        std::vector<std::string> sentenceHolder;
+        std::cout<<"Enter the sentence in order to reverse it: ";
+        std::cin.clear(); // clear input buffer to restore cin to a usable state
+        std::getline(std::cin >> std::ws, sentence);
+        std::cout<<std::endl;
+        if (sentence.size() > 1){
+        sentenceHolder=SplitSentence((char*)sentence.c_str());
+        sentence.clear();
+        std::cout<<"Words reversed: \n";
+            for(int i=0; i<sentenceHolder.size(); i++)
+            {
+                words += ReverseWord(sentenceHolder[i]) + " ";
+                           }
+        std::cout<<words<<std::endl;
+        }
+    else {
+        throw 666;
+    }
+    }
+    catch(int e){
+     std::cout << "There was a problem reversing letters in your sentence.\nPlease try again.\n Error code: " << e << std::endl;
+    }
 }
 
 #include <iostream>
 #include <string>
 int main(int argc, const char * argv[]) {
-
-    //TaskOne();
-    //TaskTwo();
-    //TaskThree();
-    //TaskFour();
-    //TaskFive();
-    //TaskSix();
-    //TaskSeven();
+    /*
+     >> Please note that you can comment out any tasks that you don't want to run at the time.
+     >> You can do so by adding "//" in front of any of the tasks below.
+     >> Currently all tasks will execute, one by one.
+     >> Enjoy researching into this, let me know if you don't understand anything!
+     >>
+     >> Best wishes, Dejan
+     */
+    std::cout << "\n>> Enjoy researching into this, let me know if you don't understand anything!" << "\n>>" << "\n>> Best wishes, Dejan" << std::endl;
+    Pause();
+    ClearScreen();
+    TaskOne();
+    TaskTwo();
+    TaskThree();
+    TaskFour();
+    TaskFive();
+    TaskSix();
+    TaskSeven();
     TaskEight();
-    
+    TaskNine();
+    TaskTen();
     std::cout << std::endl;
     return 0;
 }
