@@ -5,7 +5,7 @@
 //  Created by Dejan Misic on 08/11/2018.
 //  Copyright © 2018 Dejan Misic. All rights reserved.
 //
-
+#include "homework.hpp"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -16,6 +16,7 @@
 #include <chrono>
 #include <thread>
 #include <stdio.h>
+
 #define PI 3.14159
 void ClearScreen()
 {
@@ -523,8 +524,6 @@ void TaskTen(){
     }
 }
 
-#include <iostream>
-#include <string>
 int main(int argc, const char * argv[]) {
     /*
      >> Please note that you can comment out any tasks that you don't want to run at the time.
@@ -535,19 +534,20 @@ int main(int argc, const char * argv[]) {
      >> Best wishes, Dejan
      */
     std::cout << "\n>> Enjoy researching into this, let me know if you don't understand anything!" << "\n>>" << "\n>> Best wishes, Dejan" << std::endl;
-    Pause();
-    ClearScreen();
-    TaskOne();
-    TaskTwo();
-    TaskThree();
-    TaskFour();
-    TaskFive();
-    TaskSix();
-    TaskSeven();
-    TaskEight();
-    TaskNine();
-    TaskTen();
+    //Pause();
+    //ClearScreen();
+    //TaskOne();
+    //TaskTwo();
+    //TaskThree();
+    //TaskFour();
+    //TaskFive();
+    //TaskSix();
+    //TaskSeven();
+    //TaskEight();
+    //TaskNine();
+    //TaskTen();
     std::cout << std::endl;
+    Homework::TaskOne();
     return 0;
 }
 
