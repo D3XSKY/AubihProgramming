@@ -23,5 +23,9 @@
  class Homework{
 public:
 static void TaskOne();
+static void TaskTwo();
+static void TaskThree();
+static void TaskFour();
+static void TaskFive();
 };
 #endif /* homework_hpp */
