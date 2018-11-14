@@ -6,7 +6,6 @@
 //  Copyright © 2018 Dejan Misic. All rights reserved.
 //
 #include <iostream>
-#include <string>
 #include <vector>
 #include <algorithm>
 #include <math.h>       /* sqrt */
@@ -16,6 +15,7 @@
 #include <thread>
 #include <stdio.h>
 #include "homework.hpp"
+#include "helper.hpp"
 
 void Homework::TaskOne(){
     /*
@@ -187,10 +187,6 @@ void Homework::TaskFour(){
             std::cout << "You must input a positive integer." << std::endl;
         }
 }
-int IsNumberDivisibleByEight(int n)
-{
-    return (((n >> 3) << 3) == n);
-}
 void Homework::TaskFive(){
     /*
      5. Write a program that will, for an input integer, output if it is divisible by 8. You are not allowed to divide this number by 8 at any point in the code, either with / or % (modulo operator).
@@ -213,7 +209,7 @@ void Homework::TaskFive(){
             std::cout << "Enter integer: " << std::endl;
             std::cin >> number;
         }
-        if (IsNumberDivisibleByEight(number)){
+        if (Helper::IsNumberDivisibleByEight(number)){
             std::cout << "Number " << number << " is divisible by 8." << std::endl;
         }
         else{

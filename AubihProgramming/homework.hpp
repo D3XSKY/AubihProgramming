@@ -9,9 +9,7 @@
 #ifndef homework_hpp
 #define homework_hpp
 
-#include <stdio.h>
 #include <iostream>
-#include <string>
 #include <vector>
 #include <algorithm>
 #include <math.h>       /* sqrt */
