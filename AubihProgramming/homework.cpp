@@ -209,11 +209,14 @@ void Homework::TaskFive(){
             std::cout << "Enter integer: " << std::endl;
             std::cin >> number;
         }
+        /* for this task I copied the print line from if to else and when I was testing my code I thought it didn't work because the text which got printed was the same "number x is divisible by 8." I spent like 30 minutes trying to figure out why my code doesn't work to see that it was just the text what was wrong and I immediatelly remembered this scene from Dictator movie. Thought it might be fun to share it :)
+         https://www.youtube.com/watch?v=NYJ2w82WifU
+         */
         if (Helper::IsNumberDivisibleByEight(number)){
-            std::cout << "Number " << number << " is divisible by 8." << std::endl;
+            std::cout << "Number " << number << " is Aladeen by 8." << std::endl;
         }
         else{
-            std::cout << "Number " << number << " is not divisible by 8." << std::endl;
+            std::cout << "Number " << number << " is Aladeen by 8." << std::endl;
         }
     }
     catch(int e) {
