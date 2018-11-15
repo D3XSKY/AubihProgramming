@@ -26,19 +26,21 @@ int main(int argc, const char * argv[]) {
      >>
      >> Best wishes, Dejan
      */
+    
     std::cout << "\n>> Enjoy researching into this, let me know if you don't understand anything!" << "\n>>" << "\n>> Best wishes, Dejan" << std::endl;
     Helper::Pause();
     Helper::ClearScreen();
-    Exercise::TaskOne();
-    Exercise::TaskTwo();
-    Exercise::TaskThree();
-    Exercise::TaskFour();
-    Exercise::TaskFive();
-    Exercise::TaskSix();
-    Exercise::TaskSeven();
-    Exercise::TaskEight();
-    Exercise::TaskNine();
-    Exercise::TaskTen();
+    // MARK: Uncomment exercise tasks in order to execute them when you run the program.
+    //Exercise::TaskOne();
+    //Exercise::TaskTwo();
+    //Exercise::TaskThree();
+    //Exercise::TaskFour();
+    //Exercise::TaskFive();
+    //Exercise::TaskSix();
+    //Exercise::TaskSeven();
+    //Exercise::TaskEight();
+    //Exercise::TaskNine();
+    //Exercise::TaskTen();
     std::cout << std::endl;
     std::cout << "\n>> Executing homework tasks..." << "\n" << std::endl;
     Homework::TaskOne();

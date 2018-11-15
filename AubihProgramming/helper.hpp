@@ -31,5 +31,8 @@ public:
     static std::vector<std::string> SplitSentence(char* sentence, char delimiter=' ');
     static std::string ReverseWord(std::string& word);
     static int IsNumberDivisibleByEight(int n);
+    //static bool ValidateInput(double x);
+    //static bool ValidateInput(int x);
+    //static bool ValidateInput(char x);
 };
 #endif /* helper_hpp */

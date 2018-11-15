@@ -92,4 +92,25 @@ int Helper::IsNumberDivisibleByEight(int n)
 {
     return (((n >> 3) << 3) == n);
 }
+// TO-DO: Implement separate validation methods for all different data types that we are taking as an input from a user.
+//bool Helper::ValidateInput()
+//{
+//
+//}
+//bool Helper::ValidateInput(int x)
+//{
+//
+//}
+//bool Helper::ValidateInput(char x)
+//{
+//
+//}
+//enum Helper::Input { input_double, input_integer, input_char };
+//Color r = red;
+//switch(r)
+//{
+//    case red  : std::cout << "red\n";   break;
+//    case green: std::cout << "green\n"; break;
+//    case blue : std::cout << "blue\n";  break;
+//        }
 
